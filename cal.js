@@ -2,4 +2,4 @@
 
 'use strict';
 
-console.log('cal file is rinning');
+console.log('cal file is running');
