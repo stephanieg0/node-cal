@@ -18,9 +18,14 @@ describe('test suite', () => {
     describe('.modified_month', () => {
       it('return 13 for January', () => {
         const mod = zellers.modifiedMonth(1);
-
         expect(mod).to.equal(13);
       });
+
+       it('return 14 for February', () => {
+        const mod = zellers.modifiedMonth(2);
+        expect(mod).to.equal(14);
+      });
+
     });
      //2012, 2 === 14
      //2012, 3 === 3
@@ -32,6 +37,10 @@ describe('test suite', () => {
 
        it('return 2015 for February 2015', () => {
       expect(zellers.modifiedYear(2016, 2)).to.equal(2015);
+      });
+
+       it('return 2017 for March 2017', () => {
+      expect(zellers.modifiedYear(2017, 3)).to.equal(2017);
       });
     });
     //.modified year
@@ -47,13 +56,15 @@ describe('test suite', () => {
     // 2100, 3, 1 === 1
     // 2200, 3, 2 === 0
     // 2300, 3, 1 === 4
+  });//end of zellers
 
+    //my calendar
     describe('get the current month', () => {
-      const Output = require('../lib/month.js');
-      it('should load the current month', () => {
-        const calResult = execSync('cal').toString();
-        expect(Output.currentMonth()).to.equal(calResult);
-      });
+    const Output = require('../lib/month.js');
+    it('should load the current month', () => {
+      const calResult = execSync('cal').toString();
+      expect(Output.currentMonth()).to.equal(calResult);
     });
   });
-});
+
+});//end of test suite
