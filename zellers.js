@@ -7,28 +7,20 @@
 console.log('zellers file is running');
 
 let modifiedMonth = function (month) {
-  var mod;
+  var modMonth;
 
-  if (month === 1) {
-    mod = 13;
-    {
-    return month + 12;
-   };
-
-  } if (month === 2) {
-    mod = 14;
-     {
-    return month + 12;
-   };
+  if (month <= 2) {
+    modMonth = parseInt(month) + 12;
+    //console.log('modified month', modMonth);
+    return modMonth;
 
   } else {
-    mod = month;
 
-  }
-  return mod;
+  } return month;
+
  };
 
-let modifiedYear = function (year, month) {
+let modifiedYear = function (month, year) {
   if (month < 3){
     var year = year - 1;
 
@@ -38,11 +30,19 @@ let modifiedYear = function (year, month) {
   return year;
 };
 
-let getDay = function (year, month, day) {
+let getDay = function (day, month, year) {
   modifiedMonth(month);
-  modifiedYear(year, month);
+  modifiedYear(month, year);
   var h = (day + parseInt(((month + 1) * 26) / 10) + year + parseInt(year / 4) + 6 * parseInt(year / 100) + parseInt(year / 400) - 1) % 7;
-    return h;
+  //Su:0, Mo: 1, Tu:2, We: 3, Th:4, Fr:5, Su:6
+
+  if (h === -1) {
+      h = 6;
+  }
+
+  console.log('h', h);
+
+  return h;
 };
 
 

@@ -2,7 +2,7 @@
 
 'use strict';
 const getMonth = require('./lib/month.js');
-
+const zellers = require('./zellers.js');
 console.log('calendar responded: ');
 
 const [,, ...args] = process.argv;
@@ -13,9 +13,11 @@ if (args.length === 2){
 
   let [MonthYear, returnedMonth, returnedYear] = getMonth.currentMonth(month, year);
   let Header = getMonth.centerHeader(MonthYear);
-  getMonth.daysInMonth(returnedMonth, returnedYear);
-
-  console.log(`generateMonth(${year}, ${month})`);
+  let Days = getMonth.daysInMonth(month, year);
+  let DaysString = getMonth.daysToString(Days);
+  //let modMonth = zellers.modifiedMonth(month);
+  let modDay = zellers.getDay(1, month, year);
+  let Print = getMonth.printMonth(Header, DaysString);
 
 } else if (args.length === 1) {
   const [year] = args;
