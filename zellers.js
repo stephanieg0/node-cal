@@ -40,7 +40,7 @@ let getDay = function (day, month, year) {
       h = 6;
   }
 
-  console.log('h', h);
+  console.log('h >>', h);
 
   return h;
 };

@@ -36,7 +36,7 @@ describe('test suite', () => {
       });
 
        it('return 2015 for February 2016', () => {
-      expect(zellers.modifiedYear(2, 2015)).to.equal(2015);
+      expect(zellers.modifiedYear(2, 2016)).to.equal(2015);
       });
 
        it('return 2017 for March 2017', () => {
@@ -47,7 +47,7 @@ describe('test suite', () => {
     // 2016, 2 === 2015
     // 2017, 3 === 2017
     describe('.getDay', () => {
-      it('returns 2 (Tuesday) for March 1, 2016', () => {
+      it('returns 2 (Tuesday) for March 1, 2000', () => {
         expect(zellers.getDay(1, 3, 2000)).to.equal(3);
       });
 
@@ -57,6 +57,10 @@ describe('test suite', () => {
 
        it('returns 0 (Sunday) for March 2, 2200', () => {
         expect(zellers.getDay(2, 3, 2200)).to.equal(0);
+      });
+
+      it('returns 5 (Friday) for January 1, 2016', () => {
+        expect(zellers.getDay(1, 1, 2016)).to.equal(5);
       });
 
     });
@@ -74,7 +78,7 @@ describe('test suite', () => {
     });
 
     it('currentMonth(), output current month and year', () => {
-      expect(Output.currentMonth(1, 2016)).to.equal(['January 2016\n', 1, 2016]);
+      expect(Output.currentMonth(1, 2016)).to.eql([ 'January 2016\n', 1, 2016 ]);
     });
 
     xit('currentMonth(), should match layout of cal calendar', () => {
@@ -94,7 +98,7 @@ describe('test suite', () => {
 
 
       it('currentMonth(), should output a different month and year, March 2017', () => {
-      expect(Output.currentMonth(3, 2017)).to.equal(['March 2017\n', 3, 2017]);
+      expect(Output.currentMonth(3, 2017)).to.eql(['March 2017\n', 3, 2017]);
       });
 
     });

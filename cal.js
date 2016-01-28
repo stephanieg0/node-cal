@@ -13,10 +13,9 @@ if (args.length === 2){
 
   let [MonthYear, returnedMonth, returnedYear] = getMonth.currentMonth(month, year);
   let Header = getMonth.centerHeader(MonthYear);
+  let WeekDay = zellers.getDay(1, month, year);
   let Days = getMonth.daysInMonth(month, year);
-  let DaysString = getMonth.daysToString(Days);
-  //let modMonth = zellers.modifiedMonth(month);
-  let modDay = zellers.getDay(1, month, year);
+  let DaysString = getMonth.daysToString(Days, WeekDay);
   let Print = getMonth.printMonth(Header, DaysString);
 
 } else if (args.length === 1) {
