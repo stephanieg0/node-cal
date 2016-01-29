@@ -4,7 +4,7 @@
 
 //var MonthYear = require('/lib/month.js');
 
-console.log('zellers file is running');
+//console.log('zellers file is running');
 
 let modifiedMonth = function (month) {
   var modMonth;
@@ -40,7 +40,6 @@ let getDay = function (day, month, year) {
       h = 6;
   }
 
-  console.log('h >>', h);
 
   return h;
 };
