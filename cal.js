@@ -4,20 +4,28 @@
 const getMonth = require('./lib/month.js');
 const zellers = require('./zellers.js');
 console.log('calendar responded: ');
+console.log(" ");
 
 const [,, ...args] = process.argv;
-//console.log(args);
 
-if (args.length === 2){
+//Calculating month. Zero arguments will give current month.
+if (args.length === 2 || args.length === 0){
+
   var [month, year] = args;
 
   let [MonthYear, returnedMonth, returnedYear] = getMonth.currentMonth(month, year);
+
   let Header = getMonth.centerHeader(MonthYear);
-  let WeekDay = zellers.getDay(1, month, year);
-  let Days = getMonth.daysInMonth(month, year);
-  let DaysString = getMonth.daysToString(Days, WeekDay);
+
+  let WeekDay = zellers.getDay(1, returnedMonth, returnedYear);
+
+  let Days = getMonth.daysInMonth(returnedMonth, returnedYear);
+
+  let DaysString = getMonth.daysLayout(Days, WeekDay);
+
   let Print = getMonth.printMonth(Header, DaysString);
 
+//Calculating Year.
 } else if (args.length === 1) {
   const [year] = args;
 

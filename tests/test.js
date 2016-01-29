@@ -5,6 +5,7 @@ const {execSync} = require('child_process');
 
 describe('test suite', () => {
   const Output = require('../lib/month.js');
+  const zellers = require('../zellers.js');
 
   describe('CLI', () => {
     xit('should handle the current month', () => {
@@ -16,7 +17,6 @@ describe('test suite', () => {
   });
 
   describe("Zeller's congruence", () => {
-    const zellers = require('../zellers.js');
     describe('.modified_month', () => {
       it('return 13 for January', () => {
         expect(zellers.modifiedMonth(1)).to.equal(13);
@@ -47,7 +47,7 @@ describe('test suite', () => {
     // 2016, 2 === 2015
     // 2017, 3 === 2017
     describe('.getDay', () => {
-      it('returns 2 (Tuesday) for March 1, 2000', () => {
+      it('returns 3 (Wednesday) for March 1, 2000', () => {
         expect(zellers.getDay(1, 3, 2000)).to.equal(3);
       });
 
@@ -72,33 +72,57 @@ describe('test suite', () => {
   });//end of zellers
 
     //my calendar
-    describe('get the current month and year', () => {
-    it('daysInMonth(), output total of days the current month has (Jan, 2016)', () => {
-      expect(Output.daysInMonth(1, 2016)).to.equal(31);
-    });
+    describe('currentMonth(), get month and year', () => {
 
     it('currentMonth(), output current month and year', () => {
       expect(Output.currentMonth(1, 2016)).to.eql([ 'January 2016\n', 1, 2016 ]);
     });
 
+    it('currentMonth(), should output a different month and year, March 2017', () => {
+      expect(Output.currentMonth(3, 2017)).to.eql(['March 2017\n', 3, 2017]);
+    });
+
     xit('currentMonth(), should match layout of cal calendar', () => {
       const calResult = execSync('cal').toString();
-      expect(Output.currentMonth()).to.equal(calResult);
+      expect(Output.currentMonth(1, 2016)).to.equal(calResult);
     });
   });
 
-    describe('daysInMonth(), should get days of a different month/year', () => {
-      it('should output the total of days of a different date like, Feb 2017', () => {
+    describe('daysInMonth(), should total of days of month and year', () => {
+      it('should output total of days for Feb 2017', () => {
       expect(Output.daysInMonth(2, 2017)).to.equal(28);
       });
 
-      it('daysInMonth(), should get days of a different date like, April 2001', () => {
+      it('should output total of days for April 2001', () => {
       expect(Output.daysInMonth(4, 2001)).to.equal(30);
       });
 
+      it('output total of days for Jan, 2016', () => {
+      expect(Output.daysInMonth(1, 2016)).to.equal(31);
+       });
+    });
 
-      it('currentMonth(), should output a different month and year, March 2017', () => {
-      expect(Output.currentMonth(3, 2017)).to.eql(['March 2017\n', 3, 2017]);
+    describe('daysLayout(), should output all the days passed from daysInMonth', () => {
+      it('should output complete day layout for Feb 1, 2016', () => {
+
+      var [MonthYear, returnedMonth, returnedYear]= Output.currentMonth(2, 2016);
+
+      var Days = Output.daysInMonth(returnedMonth, returnedYear);
+
+      var WeekDay = zellers.getDay(1, returnedMonth, returnedYear);
+
+      expect(Output.daysLayout(Days, WeekDay)).to.eql('    1  2  3  4  5  6\n 7  8  9 10 11 12 13\n14 15 16 17 18 19 20\n21 22 23 24 25 26 27\n28 29');
+      });
+
+      it('should output complete day layout for Jan 1, 2016', () => {
+
+      var [MonthYear, returnedMonth, returnedYear]= Output.currentMonth(1, 2016);
+
+      var Days = Output.daysInMonth(returnedMonth, returnedYear);
+
+      var WeekDay = zellers.getDay(1, returnedMonth, returnedYear);
+
+      expect(Output.daysLayout(Days, WeekDay)).to.eql('                1  2\n 3  4  5  6  7  8  9\n10 11 12 13 14 15 16\n17 18 19 20 21 22 23\n24 25 26 27 28 29 30\n31');
       });
 
     });
