@@ -31,6 +31,9 @@ let modifiedYear = function (month, year) {
 };
 
 let getDay = function (day, month, year) {
+  console.log('Zellers day: ', day);
+  console.log('Zellera month: ', month);
+  console.log('Zellers year: ', year);
   modifiedMonth(month);
   modifiedYear(month, year);
   var h = (day + parseInt(((month + 1) * 26) / 10) + year + parseInt(year / 4) + 6 * parseInt(year / 100) + parseInt(year / 400) - 1) % 7;
@@ -40,7 +43,7 @@ let getDay = function (day, month, year) {
       h = 6;
   }
 
-
+  console.log('Zellers h result: ', h);
   return h;
 };
 
