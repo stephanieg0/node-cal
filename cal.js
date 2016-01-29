@@ -3,6 +3,7 @@
 'use strict';
 const getMonth = require('./lib/month.js');
 const zellers = require('./zellers.js');
+const getYear = require('./lib/year.js');
 console.log('calendar responded: ');
 console.log(" ");
 
@@ -29,8 +30,9 @@ if (args.length === 2 || args.length === 0){
 } else if (args.length === 1) {
   const [year] = args;
 
-  console.log(`generateMonth(${year})`);
-} else {
+  getYear.currentYear(year);
+
+  } else {
 
   console.log('Please put a date input, like 1 2016');
   process.exit(64);
